@@ -1,0 +1,18 @@
+module.exports = {
+    name: "interactionCreateButton",
+    async execute(interaction, client) {
+        if (interaction.isButton()) return;
+            const button = client.buttons.get(interaction.customId);
+            if (!button) return await interaction.reply({ content: "Jeg kunne ikke finde knappen." });
+
+            try {
+                await button.execute(interaction, client);
+            } catch (error) {
+                console.error(error);
+                await interaction.reply({
+                    content: "An error occurred while executing that command.",
+                    ephemeral: true,
+                });
+            }
+    }
+};

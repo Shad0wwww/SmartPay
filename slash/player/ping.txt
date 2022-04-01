@@ -1,0 +1,10 @@
+        const check = await member.channels.cache.find(channel => channel.name === `ticket: ${interaction.user.tag}`);
+            if (check) {
+                const embed2 = new MessageEmbed()
+                    .setColor('#ff0000')
+                    .setTitle('🎟️ Ticket - SmartPay 🎟️')
+                    .setDescription(`hi`)
+                    .setTimestamp()
+                    
+                return interaction.reply({ embeds: [embed2], ephemeral: true });
+            }

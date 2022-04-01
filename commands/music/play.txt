@@ -1,0 +1,65 @@
+const { MessageEmbed, Message, GuildMember, Intents, Client } = require('discord.js');
+const { Player, QueryType, QueueRepeatMode } = require("discord-player");
+
+
+/** 
+   * @param {Client} client 
+   * @param {Message} message 
+   * @param {String[]} args 
+*/
+
+module.exports = {
+    name: "play",
+    category: "Music",
+    aliases: ['p'],
+    utilisation: '-play [name/URL]',
+    description: "Play kommand ",
+    async execute (client, message, args) {
+        const Guild = message.guild
+        const Member = Guild.members.cache.get(message.author.id); 
+
+        if (!interaction.Member.voice.channel) {
+            const embed1 = new MessageEmbed()
+                .setColor('#ff0000')
+                .setTitle('Music')
+                .setDescription('Du skal side i en voice channel for at kunne spille musik!')
+                .setTimestamp()
+                .setFooter({ text: `${message.author.username}${message.author.id}`});
+            return await interaction.reply({ embeds: [embed1] });
+        }
+        if (interaction.Member.voice.channel && interaction.Member.voice.channel !== interaction.guild.me.voice.channelId) {
+            const embed2 = new MessageEmbed()
+                .setColor('#ff0000')
+                .setTitle('Music')
+                .setDescription('Vi er ikke i same voice Channel!')
+                .setTimestamp()
+                .setFooter({ text: `${message.author.username}${message.author.id}`});
+                
+            return await interaction.reply({ embeds: [embed2] });
+        }
+        const query = interaction.options.get("query").value;
+        const queue = player.createQueue(interaction.guild, {
+            metadata: {
+                channel: interaction.channel
+            }
+        });
+
+    }
+} 
+
+const player = new Player(Client, {
+    ytdlOptions: {
+        requestOptions: {
+            headers: {
+                cookie: "YOUR_YOUTUBE_COOKIE"
+            }
+        }
+    }
+});
+
+
+
+
+player.on("channelEmpty", (queue) => {
+    queue.metadata.send("❌ | Nobody is in the voice channel, leaving...");
+});
