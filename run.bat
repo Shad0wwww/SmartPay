@@ -10,3 +10,8 @@ echo ██████╔╝██║░░██║██║░░██║█
 echo ╚═════╝░╚═╝░░╚═╝╚═╝░░╚═╝╚═════╝░░╚════╝░░░░╚═╝░░░╚═╝░░
 cd "%~dp0"
 node index.js
+echo
+echo
+echo
+echo You can download my newest version of SmartPay-Discord.js here ->
+echo https://github.com/Shad0wwww/SmartPay-Discord.js
